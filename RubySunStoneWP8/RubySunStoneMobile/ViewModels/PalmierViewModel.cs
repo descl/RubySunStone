@@ -14,9 +14,9 @@ namespace RubySunStoneMobile.ViewModels
         private RubySunStoneDataContext palmierDB;
 
         // Class constructor, create the data context object.
-        public PalmierViewModel(string tribulDBConnectionString)
+        public PalmierViewModel(string RubySunStoneDBConnectionString)
         {
-            palmierDB = new RubySunStoneDataContext(tribulDBConnectionString);
+            palmierDB = new RubySunStoneDataContext(RubySunStoneDBConnectionString);
         }
 
         // Tous Les Palmiers.

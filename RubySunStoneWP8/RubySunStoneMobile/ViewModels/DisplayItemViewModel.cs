@@ -167,27 +167,7 @@ namespace RubySunStoneMobile.ViewModels
                 }
             }
         }
-        /// <summary>
-        /// Collecte
-        /// </summary>
-        private string collecte = "";
-
-        public string Collecte
-        {
-            get
-            {
-                return this.collecte;
-            }
-
-            set
-            {
-                if (this.collecte != value)
-                {
-                    this.collecte = value;
-                    //this.NotifyPropertyChanged();
-                }
-            }
-        }
+        
         /// <summary>
         /// Title
         /// </summary>
@@ -209,21 +189,7 @@ namespace RubySunStoneMobile.ViewModels
                 }
             }
         }
-        /// <summary>
-        /// Initializes the ViewModel properties
-        /// </summary>
-        public override void Initialize()
-        {
-            base.Initialize();
-        }
-
-        /// <summary>
-        /// Deletes the current ListItem from SharePoint server
-        /// </summary>
-        public override void DeleteItem()
-        {
-            base.DeleteItem();
-        }
+        
         //public Object Tag { get; set; }
         public Microsoft.Phone.Maps.Controls.MapOverlay Tag { get; set; }
     }

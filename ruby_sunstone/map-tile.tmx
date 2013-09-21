@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="isometric" width="100" height="100" tilewidth="32" tileheight="32" backgroundcolor="#747152">
+ <tileset firstgid="1" name="pwet" tilewidth="32" tileheight="32">
+  <image source="../../Pictures/wallpaper-2912330.jpg" width="1920" height="1080"/>
+ </tileset>
+ <layer name="fore" width="100" height="100">
+  <data encoding="base64" compression="zlib">
+   eJzt1ElOAzEQQNFOTpCD5V7kYDlBGmicMIh55gyURbXwIrD+3fqLkiNDsM2T/m7ZdX3MyaLrzmI9j9nFXMSU3D/Eepn717lXP9/m3n3MQ8xjzFPMNn7+EutrzFvMe8xHzGfMV36nzuny98whv1dyPeR6bO7yzNXi5y51nvP3/zuzP3Lm+M59c95VvvMm9+o7xzPbd9Yz/3rn+Lf6/LzKGfLepdmv/9vxzPGeU/RYT8hjnTPkvUuzPxePzYQ8NjlD3rs0+3PxsFcsD3vF8rBXLA97xfKwVywPe8XysFcsD3vF8rBXLA97xfKwVywPe8XysFcsD3vF8rBXLA97xfKwVywPe8XysFcsD3vF8rBXLA97xfKwVywPe8XysFcsD3vF8rBXLA97xfKwVywPe8XysFcsD3vF8rBXLA97xfKwVywPe8XysFcsD3vF8rBXLA97xfKwVywPe8XysFcsD3vF8rBXLA97xfKwVywPe8XysFcsD3vF8rBXLA97xfKwVywPe8XysFcsD3vF8rBXLA97xfKwVywPe8XysFcsD3vF8rBXLA97xfKwVywPe8XysFcsD3vF8rBXLA97xfKwVywPe8XysFcsD3vF8rBXLA97xfKwVywPe8XysFcsD3vF8rBXLA97xfKwVywPe8XysFcsD3vF8rBXLA97xfKwVywPe8XysFcsD3vF8rBXLA97xfKwVywPe8XymGOvvgFQDsru
+  </data>
+ </layer>
+</map>
