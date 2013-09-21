@@ -7,8 +7,8 @@
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
-    Width="140" Height="90"
-    d:DesignWidth="140" d:DesignHeight="90">
+    Width="140" Height="151"
+    d:DesignWidth="140">
 
     <Grid x:Name="LayoutRoot" Tap="LayoutRoot_Tap" >
         <Grid.ColumnDefinitions>
@@ -23,15 +23,15 @@
 
         <Grid.Background>
             <ImageBrush ImageSource="/Assets/palmier258.png" Stretch="UniformToFill" Opacity="0.5" />
-        </Grid.Background> 
+        </Grid.Background>
         <StackPanel Orientation="Horizontal" Grid.Row="0" Grid.Column="0">
             <Image Source="{Binding PictureUrl}"  Width="29" Height="40" VerticalAlignment="Top" HorizontalAlignment="Left" />
             <TextBlock Text="à " FontSize="18" Foreground="{StaticResource PhoneForegroundBrush}"/>
             <TextBlock Text="{Binding Distance}" FontSize="18" Foreground="{StaticResource PhoneForegroundBrush}"/>
             <TextBlock Text=" m" FontSize="18" Foreground="{StaticResource PhoneForegroundBrush}"/>
         </StackPanel>
-        <TextBlock Grid.Row="1" Grid.Column="0" Text="{Binding Title}" FontSize="36" Margin="0,0,0,0" Foreground="{StaticResource PhoneForegroundBrush}"/>
-        <TextBlock Grid.RowSpan="3" Grid.Row="0" Grid.Column="1" Text="{Binding Collecte}" FontSize="18" TextWrapping="Wrap" Margin="0,1,0,0" Foreground="{StaticResource PhoneForegroundBrush}"/>
-        <TextBlock Grid.Row="2" Grid.Column="0" Text="{Binding typebac}" FontSize="18" TextWrapping="Wrap" Margin="0,1,0,0" Foreground="{StaticResource PhoneForegroundBrush}"/>
+        <TextBlock Grid.Row="1" Grid.Column="0" Text="Infecté!" FontSize="36" Margin="0,0,0,0" Foreground="{StaticResource PhoneForegroundBrush}"/>
+        <TextBlock Grid.RowSpan="3" Grid.Row="0" Grid.Column="1" Text="{Binding etatPalmier}" FontSize="18" TextWrapping="Wrap" Margin="0,1,0,0" Foreground="{StaticResource PhoneForegroundBrush}"/>
+        <TextBlock Grid.Row="2" Grid.Column="0" Text="{Binding Id}" FontSize="18" TextWrapping="Wrap" Margin="0,1,0,0" Foreground="{StaticResource PhoneForegroundBrush}"/>
     </Grid>
 </UserControl>

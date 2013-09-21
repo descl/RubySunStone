@@ -71,13 +71,6 @@ namespace RubySunStoneMobile.Views
         protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-            //Debug.WriteLine("AugmentedView OnNavigatedTo deb");
-            //App.MainViewModel.ViewDataLoaded += new EventHandler<ViewDataLoadedEventArgs>(OnViewDataLoaded);
-            //App.MainViewModel.InitializationCompleted += new EventHandler<InitializationCompletedEventArgs>(OnViewModelInitialization);
-            //this.DataContext = App.MainViewModel;
-
-            //App.BacModel.ViewDataLoaded += new EventHandler<ViewDataLoadedEventArgs>(OnViewDataLoaded);
-            //App.BacModel.InitializationCompleted += new EventHandler<InitializationCompletedEventArgs>(OnViewModelInitialization);
             this.DataContext = App.PalmierModel;
 
             #region Initialisation de la caméra, et affichage à l'écran
@@ -96,7 +89,7 @@ namespace RubySunStoneMobile.Views
             if (motion == null)
             {
                 motion = new Motion();
-                motion.TimeBetweenUpdates = TimeSpan.FromMilliseconds(66); // 15 FPS
+                motion.TimeBetweenUpdates = TimeSpan.FromMilliseconds(20); // 15 FPS
                 motion.CurrentValueChanged += new EventHandler<SensorReadingEventArgs<MotionReading>>(motion_CurrentValueChanged);
 
                 try
@@ -156,12 +149,12 @@ namespace RubySunStoneMobile.Views
 
                     // N'afficher que les Palmiers qui sont devant le téléphone.
                     //Statut.Text = "Motion points:" + points.Count.ToString() + " i:" + i.ToString() + " proj X:" + projected.X.ToString() + " proj Y:" + projected.Y.ToString() + " proj Z:" + projected.Z.ToString();
-                    if (projected.Z > 1 || projected.Z < 0)
-                    {
-                        AugmentedLabels[i].Visibility = System.Windows.Visibility.Collapsed;
-                    }
-                    else
-                    {
+                    //if (projected.Z > 1 || projected.Z < 0)
+                    //{
+                    //    AugmentedLabels[i].Visibility = System.Windows.Visibility.Collapsed;
+                    //}
+                    //else
+                    //{
                         AugmentedLabels[i].Visibility = System.Windows.Visibility.Visible;
 
                         // Centrage du contrôle sur le point
@@ -169,7 +162,8 @@ namespace RubySunStoneMobile.Views
                         tt.X = projected.X - (AugmentedLabels[i].RenderSize.Width / 2);
                         tt.Y = projected.Y - (AugmentedLabels[i].RenderSize.Height / 2);
                         AugmentedLabels[i].RenderTransform = tt;
-                    }
+                    //}
+ 
                 }
             }
             catch (Exception ex)
@@ -198,18 +192,26 @@ namespace RubySunStoneMobile.Views
             Statut.Text = "Ajout des Palmiers";
             try
             {
-                Etat.Text = "Nb palmiers: " + App.PalmierModel.GetPalmiersList().Count;
-       
+                //Etat.Text = "Nb palmiers: " + App.PalmierModel.GetPalmiersList().Count;
+                int i = 0;
                 foreach (RubySunStoneMobile.Model.Palmier palmier in App.PalmierModel.GetPalmiersList())
                 {
+                    i++;
                     Pushpin pushpin = new Pushpin(palmier);
                     // Calcul du cap du palmier en fonction de la position du téléphone
                     double Bearing = Math.Round(ARHelper.CalculateBearing(pushpin.GeoCoordonnee, MaPosition.GeoCoordonnee()), 0);
                     Debug.WriteLine("bearing:" + Bearing);
                     // Calcul de la position du palmier en fonction de l'angle, et de la distance, dans le repère XNA
                     Vector3 PositionBacRelative = ARHelper.AngleToVector(Bearing, (WCSRadius * ARHelper.CalculateDistance(pushpin.GeoCoordonnee, MaPosition.GeoCoordonnee()) / Radius));
-
-                    AddPalmier(PositionBacRelative, pushpin);
+                    
+                    if (i < 5 || pushpin.Id < 8)
+                    {
+                        AddPalmier(PositionBacRelative, pushpin);
+                    }
+                    else
+                    {
+                        break;
+                    }
                 }
             }
             catch (Exception ex)
@@ -229,9 +231,9 @@ namespace RubySunStoneMobile.Views
         {
             Debug.WriteLine("AugmentedView AddBac deb, distance: " + pushpin.Distance);
             Int64 maximumDistance = Convert.ToInt64(Distance.Text);
-            if (pushpin.Distance < maximumDistance && pushpin.Distance > 1)
+            if (pushpin.Distance < maximumDistance && pushpin.Distance > 0)
             {
-                Debug.WriteLine("AugmentedView position X: " + position.X + " Y:" + position.Y + " Z:" + position.Z);
+                Etat.Text = "AugmentedView position X: " + position.X + " Y:" + position.Y + " Z:" + position.Z;
                 PalmierControl bc = new PalmierControl();
                 bc.Opacity = 0.7;// 3000/(pushpin.Distance+1);//
                 bc.DataContext = pushpin;
@@ -249,16 +251,16 @@ namespace RubySunStoneMobile.Views
         }
         private void deletePalmiers()
         {
-            points.RemoveAll(TousVector3);
-            AugmentedLabels.ForEach(delegate(UIElement bc)
-            {
-                LayoutRoot.Children.Remove(bc);
-            });
+            //points.RemoveAll(TousVector3);
+            //AugmentedLabels.ForEach(delegate(UIElement bc)
+            //{
+            //    LayoutRoot.Children.Remove(bc);
+            //});
 
 
-            AugmentedLabels.RemoveAll(TousUIElement);
-            points = new List<Vector3>();
-            AugmentedLabels = new List<UIElement>();
+            //AugmentedLabels.RemoveAll(TousUIElement);
+            //points = new List<Vector3>();
+            //AugmentedLabels = new List<UIElement>();
         }
         private static bool TousVector3(Vector3 v)
         {
