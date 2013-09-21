@@ -1,26 +1,55 @@
 <h1>See map</h1>
 
-<%= @map.to_json %>
 
-<table>
+<table style="border-spacing: 0px;" border="0">
     <% @map.each do |line|%>
-        <tr>
+        <tr border="0">
 
         <% line.each do |col| %>
               <%
                  color="red"
-                 if col == "0"
+                 if col == "0" #eau
                    color = "blue"
-                 elsif col == "1"
-                   color = "grey"
-                 elsif col =="2"
+                 elsif col == "1" #route
+                   color = "red"
+                 elsif col =="2" #herbe
                    color = "green"
-                 elsif col =="3"
-                   color = "black"
+                 elsif col =="3" #urbain
+                   color = "grey"
                  end
               %>
-            <td height="10px" width="10px" bgcolor="<%=color%>"><%= col %></td>
+            <td  border="0" height="10px" width="10px" bgcolor="<%=color%>"><%= #col
+            %></td>
         <%end%>
         </tr>
     <%end%>
 </table>
+
+
+<table style="border-spacing: 0px;" border="0">
+  <% @poisMap.each do |line|%>
+      <tr border="0">
+
+        <% line.each do |col| %>
+            <%
+               color="red"
+               if col == "0" #eau
+                 color = "blue"
+               elsif col == "1" #route
+                 color = "red"
+               elsif col =="2" #herbe
+                 color = "green"
+               elsif col =="3" #urbain
+                 color = "grey"
+               end
+            %>
+            <td  border="0" height="10px" width="10px" bgcolor=""><%= col  %></td>
+        <%end%>
+      </tr>
+  <%end%>
+</table>
+
+<%@pois.each do |poi|%>
+<%= poi.to_json%>
+<%end%>
+
