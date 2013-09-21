@@ -4,6 +4,8 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using RubySunStoneMobile.Model;
+using System.Device.Location;
+using Microsoft.Phone.Maps.Controls;
 
 
 namespace RubySunStoneMobile.ViewModels
@@ -12,7 +14,30 @@ namespace RubySunStoneMobile.ViewModels
     {
         // LINQ to SQL data context for the local database.
         private RubySunStoneDataContext palmierDB;
+       /// <summary>
+        /// GeoCoordinate of the evenement
+        /// </summary>
+        private GeoCoordinate geoCoordinate;
+       /// <summary>
+        /// Gets or sets the GeoCoordinate of the palmtree
+        /// </summary>
+        [TypeConverter(typeof(GeoCoordinateConverter))]
+        public GeoCoordinate GeoCoordinate
+        {
+            get
+            {
+                return this.geoCoordinate;
+            }
 
+            set
+            {
+                if (this.geoCoordinate != value)
+                {
+                    this.geoCoordinate = value;
+                    this.NotifyPropertyChanged("GeoCoordinate");
+                }
+            }
+        }
         // Class constructor, create the data context object.
         public PalmierViewModel(string RubySunStoneDBConnectionString)
         {
@@ -48,7 +73,7 @@ namespace RubySunStoneMobile.ViewModels
             palmierDB.SubmitChanges();
         }
         // Add .
-        public void AjoutBac(Palmier palmier)
+        public void AjoutPalmier(Palmier palmier)
         {
             //Supprime avant insert
             var palmierASupprimer = from Palmier delpalmier in palmierDB.Palmiers

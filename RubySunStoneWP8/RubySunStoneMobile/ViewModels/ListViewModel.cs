@@ -2,34 +2,33 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Microsoft.SharePoint.Phone.Application;
-using Microsoft.SharePoint.Client;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using RubySunStoneMobile.Utils;
 using System.Diagnostics;
+using System.ComponentModel;
+using System.Data.Services.Client;
 
 namespace RubySunStoneMobile.ViewModels
 {
     [DataContract]
-    [KnownType(typeof(ListViewModelBase))]
-    [KnownType(typeof(ListDataProvider))]
     [KnownType(typeof(ObservableCollection<DisplayItemViewModel>))]
-    public class ListViewModel : ListViewModelBase
+    public class ListViewModel : INotifyPropertyChanged
     {
+        public event Action dataLoaded;
+        public event Action noData;
+        private DataServiceCollection<PalmierItem> palmiers;
+
+        public DataServiceCollection<PalmierItem> Palmiers
+        {
+            get { return palmiers; }
+            set { palmiers = value; }
+        }
         /// <summary>
         /// Provides access to the DisplayItem ViewModel of selected item.
         /// </summary>
         [DataMember]
         public DisplayItemViewModel SelectedItemDisplayViewModelInstance { get; set; }
-
-        /// <summary>
-        /// Makes sure that all the artifacts (eg. ListSchema, DataProvider etc.) required by ViewModel has been initialized properly. 
-        /// </summary>
-        public override void Initialize()
-        {
-            base.Initialize();
-        }
 
         /// <summary>
         /// Loads List data for SharePoint View with the specified name
