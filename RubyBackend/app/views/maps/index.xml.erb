@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="isometric" width="20" height="20" tilewidth="32" tileheight="32">
+ <tileset firstgid="1" name="tiles" tilewidth="32" tileheight="32">
+  <image source="../tiles/bridgeEast.png" width="100" height="63"/>
+ </tileset>
+ <tileset firstgid="4" name="meta_tiles" tilewidth="32" tileheight="32">
+  <image source="/ruby_sunstone/public/tiles/meta_tiles.png" width="64" height="64"/>
+  <tile id="0">
+   <properties>
+    <property name="type" value="solid"/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="8" name="water" tilewidth="32" tileheight="32">
+  <image source="/ruby_sunstone/public/tiles/water.png" width="100" height="64"/>
+ </tileset>
+ <tileset firstgid="14" name="objectif" tilewidth="32" tileheight="32">
+  <image source="/ruby_sunstone/public/tiles/bridgeEast.png" width="100" height="63"/>
+ </tileset>
+
+ <layer name="map" width="20" height="20">
+  <data>
+    <% @map.each do |line|%>
+      <% line.each do |tile|%>
+        <tile gid="<%=tile%>"/>
+      <%end%>
+    <%end%>
+  </data>
+ </layer>
+
+
+ <layer name="collision" width="20" height="20">
+  <data>
+   <!--todo: mettre 6 quand le joueur ne peut pas y aller -->
+    <% @map.each do |line|%>
+      <% line.each do |tile|%>
+        <% if tile == "0" %>
+            <tile gid="6"/>
+        <%else%>
+            <tile gid="0"/>
+        <%end%>
+      <%end%>
+    <%end%>
+  </data>
+ </layer>
+
+ <layer name="objectifs" width="20" height="20">
+  <data>
+   <!--todo-->
+  </data>
+ </layer>
+
+ <objectgroup color="#30a40c" name="mainPlayer" width="20" height="20">
+  <object name="mainPlayer" x="225" y="311" width="57" height="51">
+   <properties>
+    <property name="image" value="mainPlayer"/>
+    <property name="spritewidth" value="32"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>
