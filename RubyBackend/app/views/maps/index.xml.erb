@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="isometric" width="20" height="20" tilewidth="32" tileheight="32">
- <tileset firstgid="1" name="tiles" tilewidth="32" tileheight="32">
-  <image source="../tiles/bridgeEast.png" width="100" height="63"/>
+<map version="1.0" orientation="isometric" width="64" height="64" tilewidth="64" tileheight="64">
+<!--
+ <tileset firstgid="1" name="patate" tilewidth="64" tileheight="64">
+  <image source="/ruby_sunstone/public/tiles/patate.png" width="512" height="512"/>
  </tileset>
- <tileset firstgid="4" name="meta_tiles" tilewidth="32" tileheight="32">
+ <tileset firstgid="65" name="patate2" tilewidth="64" tileheight="64">
+  <image source="/ruby_sunstone/public/tiles/patate2.png" width="512" height="512"/>
+ </tileset>
+ <tileset firstgid="129" name="patate3" tilewidth="64" tileheight="64">
+  <image source="/ruby_sunstone/public/tiles/patate3.png" width="512" height="512"/>
+ </tileset>
+ <tileset firstgid="193" name="meta_tiles" tilewidth="64" tileheight="64">
   <image source="/ruby_sunstone/public/tiles/meta_tiles.png" width="64" height="64"/>
   <tile id="0">
    <properties>
@@ -11,14 +18,31 @@
    </properties>
   </tile>
  </tileset>
- <tileset firstgid="8" name="water" tilewidth="32" tileheight="32">
-  <image source="/ruby_sunstone/public/tiles/water.png" width="100" height="64"/>
+ <tileset firstgid="194" name="tree" tilewidth="64" tileheight="64">
+  <image source="/ruby_sunstone/public/tiles/tree.png" width="522" height="256"/>
+ </tileset>-->
+  <tileset firstgid="1" name="patate" tilewidth="64" tileheight="64">
+  <image source="./tiles/patate.png" width="512" height="512"/>
  </tileset>
- <tileset firstgid="14" name="objectif" tilewidth="32" tileheight="32">
-  <image source="/ruby_sunstone/public/tiles/bridgeEast.png" width="100" height="63"/>
+ <tileset firstgid="65" name="patate2" tilewidth="64" tileheight="64">
+  <image source="./tiles/patate2.png" width="512" height="512"/>
+ </tileset>
+ <tileset firstgid="129" name="patate3" tilewidth="64" tileheight="64">
+  <image source="./tiles/patate3.png" width="512" height="512"/>
+ </tileset>
+ <tileset firstgid="193" name="meta_tiles" tilewidth="64" tileheight="64">
+  <image source="./tiles/meta_tiles.png" width="64" height="64"/>
+  <tile id="0">
+   <properties>
+    <property name="type" value="solid"/>
+   </properties>
+  </tile>
+ </tileset>
+ <tileset firstgid="194" name="tree" tilewidth="64" tileheight="64">
+  <image source="./tiles/tree.png" width="522" height="256"/>
  </tileset>
 
- <layer name="map" width="20" height="20">
+ <layer name="map" width="64" height="64">
   <data>
     <% @map.each do |line|%>
       <% line.each do |tile|%>
@@ -28,8 +52,32 @@
   </data>
  </layer>
 
+  <objectgroup color="#30a40c" name="mainPlayer" width="64" height="64">
+  <object name="mainPlayer" x="116" y="1745" width="64" height="64">
+   <properties>
+    <property name="image" value="mainPlayer"/>
+    <property name="spritewidth" value="32"/>
+   </properties>
+  </object>
+ </objectgroup>
 
- <layer name="collision" width="20" height="20">
+ <layer name="objectifs" width="64" height="64">
+  <data>
+    <% @poisMap.each do |line|%>
+      <% line.each do |tile|%>
+        <tile gid="<%=tile%>"/>
+      <%end%>
+    <%end%>
+  </data>
+ </layer>
+
+
+
+
+
+
+
+ <layer name="collision" width="64" height="64  ">
   <data>
    <!--todo: mettre 6 quand le joueur ne peut pas y aller -->
     <% @map.each do |line|%>
@@ -44,18 +92,7 @@
   </data>
  </layer>
 
- <layer name="objectifs" width="20" height="20">
-  <data>
-   <!--todo-->
-  </data>
- </layer>
 
- <objectgroup color="#30a40c" name="mainPlayer" width="20" height="20">
-  <object name="mainPlayer" x="225" y="311" width="57" height="51">
-   <properties>
-    <property name="image" value="mainPlayer"/>
-    <property name="spritewidth" value="32"/>
-   </properties>
-  </object>
- </objectgroup>
+
+
 </map>

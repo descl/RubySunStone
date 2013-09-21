@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130921024612) do
+ActiveRecord::Schema.define(version: 20130921061717) do
 
   create_table "maps", force: true do |t|
     t.datetime "created_at"
@@ -25,6 +25,8 @@ ActiveRecord::Schema.define(version: 20130921024612) do
     t.integer  "lvl"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.float    "coordX"
+    t.float    "coordY"
   end
 
 end
