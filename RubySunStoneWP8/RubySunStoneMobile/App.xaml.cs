@@ -9,6 +9,10 @@ using Microsoft.Phone.Shell;
 using RubySunStoneMobile.Resources;
 using RubySunStoneMobile.ViewModels;
 using RubySunStoneMobile.Model;
+using System.Collections.ObjectModel;
+using System.Net;
+using System.Runtime.Serialization.Json;
+using RubySunStoneMobile.Utils;
 
 namespace RubySunStoneMobile
 {
@@ -62,6 +66,9 @@ namespace RubySunStoneMobile
                 // et seront alimentées par la batterie lorsque l'utilisateur ne se sert pas du téléphone.
                 PhoneApplicationService.Current.UserIdleDetectionMode = IdleDetectionMode.Disabled;
             }
+ 
+            
+            
             // Specify the local database connection string.
             string DBConnectionString = "Data Source=isostore:/Palmiers.sdf";
 
@@ -82,14 +89,40 @@ namespace RubySunStoneMobile
 
 
             }
-
+            //json
+            // une fois seulement FetchPalmiersJson();
             // Create the ViewModel object.
             palmierModel = new PalmierViewModel(DBConnectionString);
-
             // Query the local database and load observable collections.
             palmierModel.LoadPalmiersFromDatabase();
+
+            Palmier palmtree = new Palmier();
+            palmtree.Id = 13748;
+            palmtree.Latitude = 43.60168801226603;
+            palmtree.Longitude = 7.0840624832821;
+            palmtree.Title = "Palmier";
+            palmtree.etatPalmier = "1";
+            palmierModel.AjoutPalmier(palmtree);
+        }
+        public void FetchPalmiersJson()
+        {
+
+            ObservableCollection<Palmier> G = new ObservableCollection<Palmier>();
+            //REST call in here
+            var webClient = new WebClient();
+            Uri uri = new Uri(SettingsHelper.urlJson());
+            webClient.OpenReadCompleted += new OpenReadCompletedEventHandler(OpenReadCompletedPalmiers);
+            webClient.OpenReadAsync(uri);
         }
 
+        private void OpenReadCompletedPalmiers(object sender, OpenReadCompletedEventArgs e)
+        {
+            DataContractJsonSerializer ser = null;
+            ser = new DataContractJsonSerializer(typeof(ObservableCollection<Palmier>));
+            palmierModel.TousLesPalmiers = ser.ReadObject(e.Result) as ObservableCollection<Palmier>;
+            this.IsDataLoaded = true;
+
+        }
         // Code à exécuter lorsque l'application démarre (par exemple, à partir de Démarrer)
         // Ce code ne s'exécute pas lorsque l'application est réactivée
         private void Application_Launching(object sender, LaunchingEventArgs e)
@@ -253,6 +286,8 @@ namespace RubySunStoneMobile
             }
         }
 
-        
+
+
+        public bool IsDataLoaded { get; set; }
     }
 }

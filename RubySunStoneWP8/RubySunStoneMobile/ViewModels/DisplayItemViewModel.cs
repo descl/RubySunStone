@@ -14,7 +14,7 @@ using System.ComponentModel;
 namespace RubySunStoneMobile.ViewModels
 {
     [DataContract]
-    public class DisplayItemViewModel : INotifyPropertyChanged
+    public class DisplayItemViewModel //: INotifyPropertyChanged
     {
 
         /// <summary>

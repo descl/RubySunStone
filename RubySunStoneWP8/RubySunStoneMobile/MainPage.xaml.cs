@@ -63,14 +63,19 @@ namespace RubySunStoneMobile
             string lng = position.Longitude.ToString();
             try
             {
-                //ie.InvokeScript("essai", new string[] { lat, lng });
-                ie.InvokeScript("essai");
+                //ie.InvokeScript("essai");
             }
             catch (Exception ex)
             {
                 Etat.Text = ex.Message;
             }
             //ie.InvokeScript("essai", new string[] { lat, lng });
+            Dispatcher.BeginInvoke(() =>
+            {
+                //ie.InvokeScript("essai", new string[] { lat, lng });
+                 NavigationService.Navigate(new Uri("/Views/AugmentedView.xaml", UriKind.Relative));
+            });
+
         }
 
 

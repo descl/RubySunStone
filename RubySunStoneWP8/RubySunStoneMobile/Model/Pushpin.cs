@@ -20,7 +20,7 @@ namespace RubySunStoneMobile.Model
             this.etatPalmier = palmier.etatPalmier;
             this.Latitude = palmier.Latitude;
             this.Longitude = palmier.Longitude;
-            this.pictureUrl = "/Assets/" + palmier.etatPalmier + ".png";
+            this.pictureUrl = "/Assets/PalmTree_" + palmier.etatPalmier + ".png";
         }
         private string pictureUrl;
 

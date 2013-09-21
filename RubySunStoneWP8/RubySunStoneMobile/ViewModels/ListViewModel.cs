@@ -13,17 +13,17 @@ namespace RubySunStoneMobile.ViewModels
 {
     [DataContract]
     [KnownType(typeof(ObservableCollection<DisplayItemViewModel>))]
-    public class ListViewModel : INotifyPropertyChanged
+    public class ListViewModel //: INotifyPropertyChanged
     {
         public event Action dataLoaded;
         public event Action noData;
-        private DataServiceCollection<PalmierItem> palmiers;
+        //private DataServiceCollection<PalmierItem> palmiers;
 
-        public DataServiceCollection<PalmierItem> Palmiers
-        {
-            get { return palmiers; }
-            set { palmiers = value; }
-        }
+        //public DataServiceCollection<PalmierItem> Palmiers
+        //{
+        //    get { return palmiers; }
+        //    set { palmiers = value; }
+        //}
         /// <summary>
         /// Provides access to the DisplayItem ViewModel of selected item.
         /// </summary>
@@ -39,8 +39,8 @@ namespace RubySunStoneMobile.ViewModels
             Debug.WriteLine("Charge données view");// + MaPosition.GeoCoordonnee().Longitude);
 
             displayViewModelCollection = new ObservableCollection<DisplayItemViewModel>();
-            IsBusy = true;
-            DataProvider.LoadData(viewName, OnLoadViewDataCompleted, filterParameters);
+            //IsBusy = true;
+            //DataProvider.LoadData(viewName, OnLoadViewDataCompleted, filterParameters);
         }
 
         /// <summary>
@@ -49,45 +49,45 @@ namespace RubySunStoneMobile.ViewModels
         /// <param name="viewName">Name of the SharePoint View which has to be loaded</param>
         public void RefreshData(string viewName, params object[] filterParameters)
         {
-            IsBusy = true;
-            ((ListDataProvider)DataProvider).RefreshData(viewName, OnLoadViewDataCompleted, filterParameters);
+            //IsBusy = true;
+            //((ListDataProvider)DataProvider).RefreshData(viewName, OnLoadViewDataCompleted, filterParameters);
         }
 
         /// <summary>
         /// Code to execute when a SharePoint View has been loaded completely.
         /// </summary>
         /// <param name="e" />
-        private void OnLoadViewDataCompleted(LoadViewCompletedEventArgs e)
-        {
-            IsBusy = false;
-            if (e.Error != null)
-            {
-                OnViewDataLoaded(this, new ViewDataLoadedEventArgs { ViewName = e.ViewName, Error = e.Error });
-                return;
-            }
+        //private void OnLoadViewDataCompleted(LoadViewCompletedEventArgs e)
+        //{
+        //    IsBusy = false;
+        //    if (e.Error != null)
+        //    {
+        //        OnViewDataLoaded(this, new ViewDataLoadedEventArgs { ViewName = e.ViewName, Error = e.Error });
+        //        return;
+        //    }
 
-            //Create a collection of DisplayItemViewModels
-            //ObservableCollection<DisplayItemViewModel> displayViewModelCollection = new ObservableCollection<DisplayItemViewModel>();
-            // dans loaddata displayViewModelCollection = new ObservableCollection<DisplayItemViewModel>();
+        //    //Create a collection of DisplayItemViewModels
+        //    //ObservableCollection<DisplayItemViewModel> displayViewModelCollection = new ObservableCollection<DisplayItemViewModel>();
+        //    // dans loaddata displayViewModelCollection = new ObservableCollection<DisplayItemViewModel>();
 
-            foreach (ListItem item in e.Items)
-            {
-                DisplayItemViewModel displayViewModel = new DisplayItemViewModel { ID = item.Id.ToString(), DataProvider = this.DataProvider };
-                Debug.WriteLine("OnLoadViewDataCompleted:" + item.Id.ToString());
-                displayViewModel.Initialize();
-                try
-                {
-                    displayViewModelCollection.Add(displayViewModel);
-                }
-                catch (Exception ex)
-                {
-                    Debug.WriteLine("OnLoadViewDataCompleted, erreur:" + ex.Message);
-                }
-            }
+        //    foreach (ListItem item in e.Items)
+        //    {
+        //        DisplayItemViewModel displayViewModel = new DisplayItemViewModel { ID = item.Id.ToString(), DataProvider = this.DataProvider };
+        //        Debug.WriteLine("OnLoadViewDataCompleted:" + item.Id.ToString());
+        //        displayViewModel.Initialize();
+        //        try
+        //        {
+        //            displayViewModelCollection.Add(displayViewModel);
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            Debug.WriteLine("OnLoadViewDataCompleted, erreur:" + ex.Message);
+        //        }
+        //    }
 
 
-            OnViewDataLoaded(this, new ViewDataLoadedEventArgs { ViewName = e.ViewName, ViewData = displayViewModelCollection });
-        }
+        //    OnViewDataLoaded(this, new ViewDataLoadedEventArgs { ViewName = e.ViewName, ViewData = displayViewModelCollection });
+        //}
         private ObservableCollection<DisplayItemViewModel> _displayViewModelCollection;
         public ObservableCollection<DisplayItemViewModel> displayViewModelCollection
         {

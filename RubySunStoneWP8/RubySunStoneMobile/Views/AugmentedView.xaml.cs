@@ -81,7 +81,7 @@ namespace RubySunStoneMobile.Views
             this.DataContext = App.PalmierModel;
 
             #region Initialisation de la caméra, et affichage à l'écran
-            camera = new PhotoCamera(CameraType.Primary);
+            camera = new PhotoCamera(CameraType.Primary);//.FrontFacing);
             viewfinderBrush.SetSource(camera);
             #endregion
 
@@ -111,6 +111,7 @@ namespace RubySunStoneMobile.Views
             #endregion
 
             //Debug.WriteLine("AugmentedView OnNavigatedTo fin");
+            AddPalmiers();
 
         }
         protected override void OnNavigatedFrom(System.Windows.Navigation.NavigationEventArgs e)
@@ -127,8 +128,6 @@ namespace RubySunStoneMobile.Views
             // to call a method on the UI thread.
             Dispatcher.BeginInvoke(() => CurrentValueChanged(e.SensorReading));
         }
-
-
 
         private void CurrentValueChanged(MotionReading reading)
         {
@@ -179,98 +178,6 @@ namespace RubySunStoneMobile.Views
                 Statut.Text = "erreur viewport.Width";
             }
         }
-        /// <summary>
-        /// Code to execute when ViewModel initialization completes
-        /// </summary>
-        //private void OnViewModelInitialization(object sender, InitializationCompletedEventArgs e)
-        //{
-        //    this.Dispatcher.BeginInvoke(() =>
-        //    {
-        //        //If initialization has failed, show error message and return
-        //        if (e.Error != null)
-        //        {
-        //            MessageBox.Show(e.Error.Message, e.Error.GetType().Name, MessageBoxButton.OK);
-        //            return;
-        //        }
-
-        //        App.BacModel.LoadData(((PivotItem)Views.SelectedItem).Name);
-        //    });
-        //}
-        ///// <summary>
-        ///// Code to execute when loading view data is complete
-        ///// </summary>
-        //void OnViewDataLoaded(object sender, ViewDataLoadedEventArgs e)
-        //{
-        //    if (e.Error != null)
-        //    {
-        //        this.Dispatcher.BeginInvoke(() =>
-        //        {
-        //            MessageBox.Show(e.Error.Message, e.Error.GetType().Name, MessageBoxButton.OK);
-        //        });
-
-        //        return;
-        //    }
-
-        //    App.BacModel[e.ViewName] = e.ViewData;
-        //}
-
-        //private void AddPoint(Vector3 point, string name)
-        //{
-        //    Debug.WriteLine("AugmentedView AddPoint deb");
-        //    // Create a new TextBlock. Set the Canvas.ZIndexProperty to make sure
-        //    // it appears above the camera rectangle.
-        //    TextBlock textblock = new TextBlock();
-        //    textblock.Text = name;
-        //    textblock.FontSize = 124;
-        //    textblock.SetValue(Canvas.ZIndexProperty, 2);
-        //    textblock.Visibility = Visibility.Collapsed;
-
-        //    // Add the TextBlock to the LayoutRoot container.
-        //    LayoutRoot.Children.Add(textblock);
-
-        //    // Add the TextBlock and the point to the List collections.
-        //    AugmentedLabels.Add(textblock);
-        //    points.Add(point);
-        //    Debug.WriteLine("AugmentedView AddPoint fin");
-        //}
-        //private void AddDirectionPoints()
-        //{
-        //    //Debug.WriteLine("AugmentedView AddDirectionPoints deb");
-        //    //AddPoint(new Vector3(0, 0, -10), "avant");
-        //    //AddPoint(new Vector3(0, 0, 10), "arrière");
-        //    //AddPoint(new Vector3(10, 0, 0), "droite");
-        //    //AddPoint(new Vector3(-10, 0, 0), "gauche");
-        //    //AddPoint(new Vector3(0, 10, 0), "haut");
-        //    //AddPoint(new Vector3(0, -10, 0), "bas");
-        //    //Debug.WriteLine("AugmentedView AddDirectionPoints fin");
-        //}
-        /// <summary>
-        /// Code to execute when a Pivot Item is loaded on the page.
-        /// </summary>
-        //private void OnPivotItemLoaded(object sender, PivotItemEventArgs e)
-        //{
-        //    //Check if ListForm ViewModel is initialized. If already initialized, start loading data for the current View
-        //    if (!App.BacModel.IsInitialized)
-        //        App.BacModel.Initialize();
-        //    else
-        //        App.BacModel.LoadData(e.Item.Name);
-        //}
-        /// <summary>
-        /// Code to execute when selection of item in the ListBox changes
-        /// </summary>
-        //private void OnSelectionChanged(object sender, SelectionChangedEventArgs e)
-        //{
-        //    //If no selection is made, return
-        //    if ((sender as ListBox).SelectedIndex == -1)
-        //        return;
-
-        //    //Set selected Item in MainViewModel
-        //    App.BacModel.SelectedItemDisplayViewModelInstance = (sender as ListBox).SelectedItem as DisplayItemViewModel;
-
-        //    //Navigate to DisplayForm and reset the selection to none.
-        //    NavigationService.Navigate(new Uri("/Views/DisplayForm.xaml", UriKind.Relative));
-        //    (sender as ListBox).SelectedIndex = -1;
-        //}
 
         private void Capture_Click(object sender, EventArgs e)
         {
@@ -291,6 +198,8 @@ namespace RubySunStoneMobile.Views
             Statut.Text = "Ajout des Palmiers";
             try
             {
+                Etat.Text = "Nb palmiers: " + App.PalmierModel.GetPalmiersList().Count;
+       
                 foreach (RubySunStoneMobile.Model.Palmier palmier in App.PalmierModel.GetPalmiersList())
                 {
                     Pushpin pushpin = new Pushpin(palmier);
