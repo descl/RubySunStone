@@ -30,8 +30,9 @@
             </Rectangle.Fill>
         </Rectangle>
         <StackPanel x:Name="DistancePanel" Grid.Row="0" Margin="12,17,0,28" Visibility="Visible">
+            <TextBlock Name="Etat" Opacity="0.5" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Prêt"/>
             <TextBlock Name="Statut" Opacity="0.5" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Entrez un rayon de recherche des palmiers"/>
-            <TextBox Name="Distance" Text="4000" HorizontalAlignment="Left" Height="72" Margin="10,0,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="456"/>
+            <TextBox Name="Distance" Text="10000" HorizontalAlignment="Left" Height="72" Margin="10,0,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="456"/>
             <Button Name="DistanceBtn" Content="Chercher" HorizontalAlignment="Left" Margin="12,0,0,0" VerticalAlignment="Top" Click="Distance_Click"/>
         </StackPanel>
         <phone:Pivot Grid.Row="2" Name="Views" Title="Tribul">

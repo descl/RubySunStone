@@ -10,6 +10,7 @@ namespace RubySunStoneMobile.Utils
     public static class SettingsHelper
     {
         private static string serverUrl = "http://www.batchass.fr/h.html";
+        private static string jsonUrl = "http://www.batchass.fr/pois.json";
         public static void SaveSettings(string urlSrv)
         {
             serverUrl = urlSrv;
@@ -22,6 +23,14 @@ namespace RubySunStoneMobile.Utils
             {
                 settings["server.url"] = serverUrl;
             }
+            if (!settings.Contains("json.url"))
+            {
+                settings.Add("json.url", jsonUrl);
+            }
+            else
+            {
+                settings["json.url"] = jsonUrl;
+            }
         }
         public static void RestoreSettings()
         {
@@ -31,11 +40,19 @@ namespace RubySunStoneMobile.Utils
             {
                 serverUrl = "http://www.batchass.fr/h.html";
             }
-            
+             if (!settings.TryGetValue<string>("json.url", out jsonUrl))
+            {
+                jsonUrl = "http://www.batchass.fr/pois.json";
+            }
+           
         }
         public static string urlServeur()
         {
             return serverUrl;
+        }
+        public static string urlJson()
+        {
+            return jsonUrl;
         }
     }
 }

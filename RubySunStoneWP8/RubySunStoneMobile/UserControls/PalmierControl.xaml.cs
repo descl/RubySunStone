@@ -9,16 +9,16 @@ using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using System.Windows.Input;
 using System.Diagnostics;
-using Tribul_mobile.ViewModels;
+using RubySunStoneMobile.ViewModels;
 using System.Windows.Navigation;
 
-namespace Tribul_mobile.UserControls
+namespace RubySunStoneMobile.UserControls
 {
-    public partial class BacControl : UserControl
+    public partial class PalmierControl : UserControl
     {
         private bool Etendu = false;
         
-        public BacControl()
+        public PalmierControl()
         {
             InitializeComponent();
         }
