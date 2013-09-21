@@ -1,0 +1,26 @@
+<h1>See map</h1>
+
+<%= @map.to_json %>
+
+<table>
+    <% @map.each do |line|%>
+        <tr>
+
+        <% line.each do |col| %>
+              <%
+                 color="red"
+                 if col == "0"
+                   color = "blue"
+                 elsif col == "1"
+                   color = "grey"
+                 elsif col =="2"
+                   color = "green"
+                 elsif col =="3"
+                   color = "black"
+                 end
+              %>
+            <td height="10px" width="10px" bgcolor="<%=color%>"><%= col %></td>
+        <%end%>
+        </tr>
+    <%end%>
+</table>
