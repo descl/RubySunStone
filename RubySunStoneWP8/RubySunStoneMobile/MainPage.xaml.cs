@@ -9,6 +9,7 @@ using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using RubySunStoneMobile.Resources;
 using System.Device.Location;
+using RubySunStoneMobile.Utils;
 
 namespace RubySunStoneMobile
 {
@@ -21,16 +22,58 @@ namespace RubySunStoneMobile
         public MainPage()
         {
             InitializeComponent();
-           
-            ie.Source = new Uri("http://www.kevs3d.co.uk/dev/phoria/", UriKind.Absolute);
+
+            ie.Source = new Uri(SettingsHelper.urlServeur(), UriKind.Absolute);
             // Exemple de code pour la localisation d'ApplicationBar
             //BuildLocalizedApplicationBar();
         }
 
         private void ie_LoadCompleted(object sender, NavigationEventArgs e)
         {
-            ie.InvokeScript("essai", "ok");
+            gcw = new GeoCoordinateWatcher(GeoPositionAccuracy.High);
+            if (gcw.Permission == GeoPositionPermission.Granted)
+            {
+                gcw.MovementThreshold = 20;
+                gcw.PositionChanged += new EventHandler<GeoPositionChangedEventArgs<GeoCoordinate>>(gcw_PositionChanged);
+                gcw.Start();
+                gcw.StatusChanged += gcw_StatusChanged;
+            }
+            else
+            {
+                MessageBox.Show("Vous n'avez pas autorisé la permission de géolocalisation - Saisissez une position");
+            }
         }
+
+        //geolocalisation
+        private void gcw_PositionChanged(object sender, GeoPositionChangedEventArgs<GeoCoordinate> e)
+        {
+            position = e.Position.Location;
+            Etat.Text = position.Latitude + " " + position.Longitude;
+            
+            
+        }
+        private void gcw_StatusChanged(object sender, GeoPositionStatusChangedEventArgs e)
+        {
+            Etat.Text = e.Status.ToString();
+        }
+
+        private void Situer_Click(object sender, RoutedEventArgs e)
+        {
+            string lat = position.Latitude.ToString();
+            string lng = position.Longitude.ToString();
+            try
+            {
+                //ie.InvokeScript("essai", new string[] { lat, lng });
+                ie.InvokeScript("essai");
+            }
+            catch (Exception ex)
+            {
+                Etat.Text = ex.Message;
+            }
+            //ie.InvokeScript("essai", new string[] { lat, lng });
+        }
+
+
 
         // Exemple de code pour la conception d'une ApplicationBar localisée
         //private void BuildLocalizedApplicationBar()

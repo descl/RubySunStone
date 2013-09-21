@@ -42,6 +42,8 @@
         <!--TitlePanel contient le nom de l'application et le titre de la page-->
         <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
             <TextBlock Text="Ruby Sun Stone" Style="{StaticResource PhoneTextNormalStyle}" Margin="12,0"/>
+            <TextBlock Name="Etat" Text="Etat" Style="{StaticResource PhoneTextNormalStyle}" Margin="12,0"/>
+            <Button Content="Geo" Name="Situer" Click="Situer_Click"/>
         </StackPanel>
 
         <!--ContentPanel - placez tout contenu supplémentaire ici-->

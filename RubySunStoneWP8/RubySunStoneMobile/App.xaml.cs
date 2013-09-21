@@ -7,11 +7,19 @@ using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using RubySunStoneMobile.Resources;
+using RubySunStoneMobile.ViewModels;
+using RubySunStoneMobile.Model;
 
 namespace RubySunStoneMobile
 {
     public partial class App : Application
     {
+        //Modele local db
+        private static PalmierViewModel palmierModel;
+        public static PalmierViewModel PalmierModel
+        {
+            get { return palmierModel; }
+        }
         /// <summary>
         /// Permet d'accéder facilement au frame racine de l'application téléphonique.
         /// </summary>
@@ -54,7 +62,32 @@ namespace RubySunStoneMobile
                 // et seront alimentées par la batterie lorsque l'utilisateur ne se sert pas du téléphone.
                 PhoneApplicationService.Current.UserIdleDetectionMode = IdleDetectionMode.Disabled;
             }
+            // Specify the local database connection string.
+            string DBConnectionString = "Data Source=isostore:/Palmiers.sdf";
 
+            // Create the database if it does not exist.
+            using (RubySunStoneDataContext db = new RubySunStoneDataContext(DBConnectionString))
+            {
+                //if (db.DatabaseExists() == true)
+                //{
+                //    db.DeleteDatabase();
+                //    db.SubmitChanges();
+                //}
+                if (db.DatabaseExists() == false)
+                {
+                    // Create the local database.
+                    db.CreateDatabase();
+                    db.SubmitChanges();
+                }
+
+
+            }
+
+            // Create the ViewModel object.
+            palmierModel = new PalmierViewModel(DBConnectionString);
+
+            // Query the local database and load observable collections.
+            palmierModel.LoadPalmiersFromDatabase();
         }
 
         // Code à exécuter lorsque l'application démarre (par exemple, à partir de Démarrer)
@@ -219,5 +252,7 @@ namespace RubySunStoneMobile
                 throw;
             }
         }
+
+        
     }
 }
