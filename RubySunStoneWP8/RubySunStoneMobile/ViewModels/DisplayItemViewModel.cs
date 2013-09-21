@@ -9,59 +9,14 @@ using System.Threading.Tasks;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using RubySunStoneMobile.Utils;
+using System.ComponentModel;
 
 namespace RubySunStoneMobile.ViewModels
 {
     [DataContract]
-    public class DisplayItemViewModel : DisplayItemViewModelBase
+    public class DisplayItemViewModel : INotifyPropertyChanged
     {
-        /// <summary>
-        /// Provides display values for fields of the List, given its name. Also used for data binding to Display form UI
-        /// </summary>
-        public override object this[string spFieldName]
-        {
-            get
-            {
-                try
-                {
-                    return base[spFieldName];
-                }
-                catch (Exception)
-                {
-                    return "";                    
-                }
-            }
-            set
-            {
-                if (value != null ) Debug.WriteLine("fieldName:" + spFieldName + " value:" + value.ToString());
-                switch (spFieldName)
-                {
-                    case "Title":
-                        Title = value.ToString();
-                        break;
-                    case "typebac":
-                        typebac = value.ToString();
-                        break;
-                    case "ID":
-                        Id = Convert.ToInt32(value.ToString());
-                        break;
-                    case "Geolocalisation":
-                        GeoCoordonnee = (GeoCoordinate)value;
-                        Distance = ARHelper.CalculateDistance((GeoCoordinate)value, MaPosition.GeoCoordonnee());
-                        break;
-                    case "Description":
-                        Description = value.ToString();
-                        break;
-                    case "Collecte":
-                        Collecte = value.ToString();
-                        break;
-                       
-                }
 
-                base[spFieldName] = value;
-            }
-        }
-       
         /// <summary>
         /// Geolocalisation
         /// </summary>
@@ -84,22 +39,22 @@ namespace RubySunStoneMobile.ViewModels
             }
         }
         /// <summary>
-        /// Typebac
+        /// etatPalmier
         /// </summary>
-        private string bactype = "";
+        private string _etatPalmier = "";
 
-        public string typebac
+        public string etatPalmier
         {
             get
             {
-                return this.bactype;
+                return this._etatPalmier;
             }
 
             set
             {
-                if (this.bactype != value)
+                if (this._etatPalmier != value)
                 {
-                    this.bactype = value;
+                    this._etatPalmier = value;
                     //this.NotifyPropertyChanged();
                 }
             }
