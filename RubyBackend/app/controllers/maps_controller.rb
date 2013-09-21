@@ -39,18 +39,32 @@ class MapsController < ApplicationController
       if poi.y == nil
         continue
       end
-      if poi.x > x0 && poi.x < (x1-1) && poi.y < y1 && poi.y > y0
+      if poi.x > (x0+1) && poi.x < (x1-3) && poi.y < y1 && poi.y > (y0+3)
         level = Integer((poi.lvl)/5)
         puts level
 
         begin
 
-          @poisMap[poi.y][poi.x]   = 1 + level*5
-          @poisMap[poi.y][poi.x+1] = 2 + level*5
-          @poisMap[poi.y-1][poi.x] = 3 + level*5
-          @poisMap[poi.y-1][poi.x+1] = 4 + level*5
-          @poisMap[poi.y-2][poi.x] = 5 + level*5
-          @poisMap[poi.y-2][poi.x+1] = 6 + level*5
+          arbres = Array.new
+          arbres[0] = [[202,203],[210,211],[218,219]]
+          arbres[1] = [[204,205],[212,213],[220,221]]
+          arbres[2] = [[206,207],[214,215],[222,223]]
+          arbres[3] = [[208,209],[216,217],[224,225]]
+
+          #@poisMap[poi.y][poi.x]   = 1 + level*5
+          #@poisMap[poi.y][poi.x+1] = 2 + level*5
+          #@poisMap[poi.y-1][poi.x] = 3 + level*5
+          #@poisMap[poi.y-1][poi.x+1] = 4 + level*5
+          #@poisMap[poi.y-2][poi.x] = 5 + level*5
+          #@poisMap[poi.y-2][poi.x+1] = 6 + level*5
+
+          @poisMap[poi.y-1][poi.x+1]   = arbres[level][0][1]
+
+          @poisMap[poi.y][poi.x]     = arbres[level][0][0]
+          @poisMap[poi.y][poi.x+2]   = arbres[level][1][1]
+          @poisMap[poi.y+1][poi.x+1]   = arbres[level][1][0]
+          @poisMap[poi.y+1][poi.x+3]   = arbres[level][2][1]
+          @poisMap[poi.y+2][poi.x+2] = arbres[level][2][0]
         rescue
         end
         #@pois << poi

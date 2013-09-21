@@ -8,17 +8,17 @@
         <% line.each do |col| %>
               <%
                  color="red"
-                 if col == "0" #eau
+                 if col == "129" #eau
                    color = "blue"
-                 elsif col == "1" #route
+                 elsif col == "133" #route
                    color = "red"
-                 elsif col =="2" #herbe
+                 elsif col =="132" #herbe
                    color = "green"
-                 elsif col =="3" #urbain
+                 elsif col =="137" #urbain
                    color = "grey"
                  end
               %>
-            <td  border="0" height="10px" width="10px" bgcolor="<%=color%>"><%= #col
+            <td  border="0" height="2px" width="2px" bgcolor="<%=color%>"><%= #col
             %></td>
         <%end%>
         </tr>
