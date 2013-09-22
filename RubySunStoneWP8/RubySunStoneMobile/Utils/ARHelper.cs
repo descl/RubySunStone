@@ -17,20 +17,20 @@ namespace RubySunStoneMobile.Utils
         //SIN(RADIANS(@latitude_origem))*SIN(RADIANS (@latitude_destino))
         //+ COS(RADIANS(@latitude_origem))*COS(RADIANS(@latitude_destino))*COS(RADIANS(@dif_Longitude)))
            
-        public static int CalculateDistance(GeoCoordinate Bac, GeoCoordinate MyPosition)
+        public static int CalculateDistance(GeoCoordinate Element, GeoCoordinate MyPosition)
         {
-            double num1 = Math.Sin(ARHelper.DegreeToRadian(MyPosition.Latitude) ) * Math.Sin(ARHelper.DegreeToRadian(Bac.Latitude) );
-            double num2 = Math.Cos(ARHelper.DegreeToRadian(MyPosition.Longitude - Bac.Longitude));
-            double num3 = Math.Cos(ARHelper.DegreeToRadian(MyPosition.Latitude)) * Math.Cos(ARHelper.DegreeToRadian(Bac.Latitude)) * num2;
+            double num1 = Math.Sin(ARHelper.DegreeToRadian(MyPosition.Latitude) ) * Math.Sin(ARHelper.DegreeToRadian(Element.Latitude) );
+            double num2 = Math.Cos(ARHelper.DegreeToRadian(MyPosition.Longitude - Element.Longitude));
+            double num3 = Math.Cos(ARHelper.DegreeToRadian(MyPosition.Latitude)) * Math.Cos(ARHelper.DegreeToRadian(Element.Latitude)) * num2;
             double num4 = num1 + num3;
             return Convert.ToInt32(rayonTerre * Math.Acos(num4));
         }
-        public static double CalculateBearing(GeoCoordinate Bac, GeoCoordinate MyPosition)
+        public static double CalculateBearing(GeoCoordinate Element, GeoCoordinate MyPosition)
         {
-            ARHelper.DegreeToRadian(MyPosition.Latitude - Bac.Latitude);
+            ARHelper.DegreeToRadian(MyPosition.Latitude - Element.Latitude);
 
-            double num1 = ARHelper.DegreeToRadian(MyPosition.Longitude - Bac.Longitude);
-            double num2 = ARHelper.DegreeToRadian(Bac.Latitude);
+            double num1 = ARHelper.DegreeToRadian(MyPosition.Longitude - Element.Longitude);
+            double num2 = ARHelper.DegreeToRadian(Element.Latitude);
             double num3 = ARHelper.DegreeToRadian(MyPosition.Latitude);
             double angle = Math.Atan2(Math.Sin(num1) * Math.Cos(num3), Math.Cos(num2) 
                 * Math.Sin(num3) - Math.Sin(num2) * Math.Cos(num3) * Math.Cos(num1));

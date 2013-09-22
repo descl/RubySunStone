@@ -95,12 +95,12 @@ namespace RubySunStoneMobile
             // Query the local database and load observable collections.
             palmierModel.LoadPalmiersFromDatabase();
             // une fois seulement
-            //FetchPalmiersJson();
+            FetchPalmiersJson();
 
             Palmier palmtree = new Palmier();
-            palmtree.Id = 7;
-            palmtree.Latitude = 43.615045;
-            palmtree.Longitude = 7.07100596;
+            palmtree.Id = 10;
+            palmtree.Latitude = 43.60;
+            palmtree.Longitude = 7.085;
             palmtree.Title = "Salle11";
             palmtree.etatPalmier = "0";
             palmierModel.AjoutPalmier(palmtree);
