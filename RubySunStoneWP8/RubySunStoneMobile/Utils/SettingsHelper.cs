@@ -9,7 +9,7 @@ namespace RubySunStoneMobile.Utils
 {
     public static class SettingsHelper
     {
-        private static string serverUrl = "http://www.batchass.fr/h.html";
+        private static string serverUrl = "http://www.batchass.fr/ruby_sunstone/index.html";
         private static string jsonUrl = "http://www.batchass.fr/pois.json";
         public static void SaveSettings(string urlSrv)
         {
@@ -38,7 +38,7 @@ namespace RubySunStoneMobile.Utils
  
             if (!settings.TryGetValue<string>("server.url", out serverUrl))
             {
-                serverUrl = "http://www.batchass.fr/h.html";
+                serverUrl = "http://www.batchass.fr/ruby_sunstone/index.html";
             }
              if (!settings.TryGetValue<string>("json.url", out jsonUrl))
             {
